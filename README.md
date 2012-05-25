@@ -3,9 +3,9 @@
 It is written in pure Lua and features [Jump Point Search][] algorithm.
 
 ##Files##
-* The folder [Lib][] contains the entire Library.
-* The file [Jumper_(Demo).love][] is a visual interactive demo.
-* The file [Jumper_(Tests).love][] is also a demo which performs a set of benchmark tests.
+* [Lib][] contains the entire Library.
+* [Jumper_(Demo).love][] is a visual interactive demo.
+* [Jumper_(Tests).love][] is also a demo which performs a set of benchmark tests.
   
 ##Usage##
 Place the folder 'Lib' inside your projet. Use *require* command to load.
@@ -76,7 +76,7 @@ This should not cause a serious issue as the move from one step to another along
 * [Binary heaps][]
 
 ##About Visual Demo##
-[Jumper (Demo).love][] is a visual demo of for the current library.<br/>
+[Jumper_(Demo).love][] is a visual demo of for the current library.<br/>
 You can run it on Windows, MAC & Linux using [Löve][] Framework<br/>
 Command Keys:
 * *Left Mouse* : Place the start node.
@@ -139,6 +139,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 [Daniel Harabor]: http://users.cecs.anu.edu.au/~dharabor/home.html
 [technical papers]: http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf
 [MIT-LICENSE]: http://www.opensource.org/licenses/mit-license.php
-[Lib]: https://github.com/Yonaba/Jumper/Lib
-[Jumper_(Demo).love]: https://github.com/Yonaba/Jumper/Lib
-[Jumper_(Tests).love]: https://github.com/Yonaba/Jumper/Lib
+[Lib]: https://github.com/Yonaba/Jumper/tree/master/Lib
+[Jumper_(Demo).love]: https://github.com/Yonaba/Jumper/blob/master/Jumper_(Demo).love
+[Jumper_(Tests).love]: https://github.com/Yonaba/Jumper/blob/master/Jumper_(Tests).love
