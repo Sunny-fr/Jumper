@@ -96,7 +96,7 @@ You will find these outputs on different locations according to your operating s
 * Windows XP : *C:\Documents and Settings\Your_Username\Application Data\Love\Jumper\* or *%appdata%\Love\Jumper\*
 * Windows Vista and 7 : *C:\Users\Your_Username\AppData\Roaming\LOVE\Jumper\* or *%appdata%\Love\Jumper\*
 * Linux : *$XDG_DATA_HOME/love/ or ~/.local/share/love/Jumper/*
-* Mac : */Users/Your_Username/Library/Application Support/LOVE/*
+* Mac : */Users/Your_Username/Library/Application Support/LOVE/Jumper/*
 
 
 ##Credits##
