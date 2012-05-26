@@ -140,5 +140,5 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 [technical papers]: http://users.cecs.anu.edu.au/~dharabor/data/papers/harabor-grastien-aaai11.pdf
 [MIT-LICENSE]: http://www.opensource.org/licenses/mit-license.php
 [Lib]: https://github.com/Yonaba/Jumper/tree/master/Lib
-[Jumper_(Demo).love]: https://github.com/Yonaba/Jumper/blob/master/Jumper_(Demo).love
-[Jumper_(Tests).love]: https://github.com/Yonaba/Jumper/blob/master/Jumper_(Tests).love
+[Jumper_(Demo).love]: https://github.com/downloads/Yonaba/Jumper/Jumper_(Demo).love
+[Jumper_(Tests).love]: https://github.com/downloads/Yonaba/Jumper/Jumper_(Tests).love
