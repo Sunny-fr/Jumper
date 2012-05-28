@@ -29,20 +29,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	- http://rperrot.developpez.com/articles/algo/structures/arbres/
 --]]
 
---[[ Version history
 
-* 05/21/12 - v1.0
-			Heap class and instance now managed with Lua Class System
-			Internal class structure modified, items now stored in a private "_heap" field
-			Added heap:init(), heap:top(), heap:replace(), heap:heap()
 
-* 05/14/12 - v0.3 - Initial Public Release
---]]
-
-module(...,package.seeall)
-
+local require = require
 local assert = assert
-local ipairs,pairs = ipairs,pairs
+local ipairs = ipairs
+local pairs = pairs
 local floor = math.floor
 local tostring = tostring
 
@@ -85,15 +77,16 @@ local function percolate_down(self,index)
 	self._heap[index],self._heap[minIndex] = self._heap[minIndex],self._heap[index]
 	percolate_down(self,minIndex) -- Recursive call from the newly shifted index
 	end
+
 end
 
--- Loads dependancies
-local LCS  = require (_PACKAGE .. '.LCS')
 
+module(...,package.seeall)
+local LCS  = require (_PACKAGE..'third-party.LCS')
 _M.LCS = nil
 
--- The binary heap class
-local heap = LCS.class {_VERSION = "1.0", sort = f_min}
+-- The heap class
+local heap = LCS.class {_VERSION = "1.2", sort = f_min}
 
 -- Class constructor
 -- Returns a new heap [table]

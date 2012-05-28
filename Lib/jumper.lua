@@ -294,5 +294,6 @@ function JPS:searchPath(sx,sy,ex,ey)
 	return nil
 end
 
+JPS._VERSION = "0.2"
 return JPS
 
