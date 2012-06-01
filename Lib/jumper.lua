@@ -21,6 +21,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --]]
 
+local _VERSION = "0.3"
+
 module(...,package.seeall)
 
 local insert = table.insert
@@ -294,6 +296,6 @@ function JPS:searchPath(sx,sy,ex,ey)
 	return nil
 end
 
-JPS._VERSION = "0.2"
+
 return JPS
 

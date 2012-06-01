@@ -10,9 +10,11 @@ It is written in pure Lua and features [Jump Point Search][] algorithm.
 ##Usage##
 Place the folder 'Lib' inside your projet. Use *require* command to load.
 
-    local Jumper = require('Lib')
-    
-You must now setup a 2D matrix of integers representing your world. Values stored in this matrix
+    local Jumper = require('Lib.init')
+
+*Note : If you are using [Löve][] Framework, you can simply use: require('Lib')*
+
+Now you must now setup a 2D matrix of integers representing your world. Values stored in this matrix
 should represent whether or not a cell on the matrix is walkable or not. If you choose for instance
 *0* for walkable tiles, any other values will be considered as non walkable.
 

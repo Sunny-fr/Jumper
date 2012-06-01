@@ -82,11 +82,12 @@ end
 
 
 module(...,package.seeall)
-local LCS  = require (_PACKAGE..'third-party.LCS')
+local LCS  = require (_PACKAGE..'.LCS')
 _M.LCS = nil
 
 -- The heap class
-local heap = LCS.class {_VERSION = "1.2", sort = f_min}
+local heap = LCS.class {_VERSION = "1.2"}
+heap.sort = f_min
 
 -- Class constructor
 -- Returns a new heap [table]
