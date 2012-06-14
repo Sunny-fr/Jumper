@@ -86,7 +86,7 @@ local LCS  = require (_PACKAGE..'.LCS')
 _M.LCS = nil
 
 -- The heap class
-local heap = LCS.class {_VERSION = "1.2"}
+local heap = LCS.class {_VERSION = "1.3"}
 heap.sort = f_min
 
 -- Class constructor
@@ -105,7 +105,7 @@ end
 
 -- Gets heap size (the very number of elements stored in the heap)
 -- Returns the heap size [number]
-function heap:size()
+function heap:getSize()
 	return self.size
 end
 

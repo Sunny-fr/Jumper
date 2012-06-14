@@ -27,14 +27,14 @@ local insert = table.insert
 local ipairs = ipairs
 
 -- Loads dependancies
-local LCS = require (_PACKAGE .. '.third-party.LCS')
+local Oo = require (_PACKAGE .. '.third-party.LCS')
 local Node = require (_PACKAGE .. '.node')
 
-_M.LCS = nil
+_M.Oo = nil
 _M.Node = nil
 
--- Private  utilities
-
+--------------------------------------------------------------------
+-- Private utilities
 -- Creates a list of nodes, given a 2D map
 local function buildGrid(map, width, height,walkable)
 	local nodes = {}
@@ -54,15 +54,19 @@ local function within(i,lowerBound,upperBound)
 	return (i>= lowerBound and i<= upperBound)
 end
 
+---------------------------------------------------------------------
+
 -- Creates a grid class
-local Grid = LCS.class { width = nil, height = nil,
-							map = nil, nodes = {},
-							-- Set of vectors used to identify neighbours of a given position <x,y> in a 2D plane
-							xOffsets = {-1,0,1,0},
-							yOffsets = {0,1,0,-1},
-							xDiagonalOffsets = {-1,-1,1,1},
-							yDiagonalOffsets = {-1,1,1,-1},
-						}
+local Grid = Oo.class { 
+	width = nil, height = nil,
+	map = nil, nodes = {},
+	
+	-- Set of vectors used to identify neighbours of a given position <x,y> in a 2D plane
+	xOffsets = {-1,0,1,0},
+	yOffsets = {0,1,0,-1},
+	xDiagonalOffsets = {-1,-1,1,1},
+	yDiagonalOffsets = {-1,1,1,-1},
+}
 
 -- Custom initializer
 function Grid:init(map,walkable)
@@ -116,6 +120,7 @@ function Grid:getNeighbours(node,allowDiagonal)
 	return neighbours
 end
 
+-- Resets the grid for a next path computation
 function Grid:reset()
 	for k,y in ipairs(self.nodes) do
 		for x,node in ipairs(y) do

@@ -1,5 +1,10 @@
 #Version history#
 
+##1.0 (06/14/12)
+* Added Path smoother
+* Better handling of straight moves
+* Code cleaning
+
 ##0.3 (06/01/12)
 * Bugfix with internal paths calls to third-parties.
 
