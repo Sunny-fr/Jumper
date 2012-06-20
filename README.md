@@ -1,6 +1,4 @@
-﻿﻿#Jumper#
-
-__Jumper__ is a pathfinding library designed for __uniform-cost 2D grid-based__ games featuring [Jump Point Search][] algorithm.<br/>
+﻿__Jumper__ is a pathfinding library designed for __uniform-cost 2D grid-based__ games featuring [Jump Point Search][] algorithm.<br/>
 __Jumper__ is (very) fast, lightweight and generates almost no memory overhead. As such, it might be an interesting option
 for pathfinding computation on 2D maps.
 Plus, *Jumper* offers a clean API which makes it very friendly and easy-to-use.<br/>
@@ -256,29 +254,29 @@ You will find these outputs as __log files__ (regular Text files) on __different
 This work is under [MIT-LICENSE][]<br/>
 Copyright (c) 2012 Roland Yonaba
 
-Permission is hereby granted, free of charge, to any person obtaining a
-copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
 
-The above copyright notice and this permission notice shall be included
-in all copies or substantial portions of the Software.
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [Jump Point Search]: http://harablog.wordpress.com/2011/09/07/jump-point-search/
-[Lua Class System]: https://github.com/Yonaba/Lua-Class-System
+[Lua Class System]: http://yonaba.github.com/Lua-Class-System/
 [Lua]: http://lua.org
-[Binary heaps]: https://github.com/Yonaba/Binary-Heaps
+[Binary heaps]: http://yonaba.github.com/Binary-Heaps/
 [Löve]: https://love2d.org
 [Löve 0.8.0 Framework]: https://love2d.org
 [Dragon Age : Origins]: http://dragonage.bioware.com
