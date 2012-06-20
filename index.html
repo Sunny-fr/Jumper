@@ -1,0 +1,420 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jumper by Yonaba</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Jumper</h1>
+        <p>Library for Fast Pathfinding on 2D Grid-based games featuring Jump Point Search Algorithm</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/Yonaba/Jumper" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/Yonaba/Jumper/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/Yonaba/Jumper/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <p><strong>Jumper</strong> is a pathfinding library designed for <strong>uniform-cost 2D grid-based</strong> games featuring <a href="http://harablog.wordpress.com/2011/09/07/jump-point-search/">Jump Point Search</a> algorithm.<br><strong>Jumper</strong> is (very) fast, lightweight and generates almost no memory overhead. As such, it might be an interesting option
+for pathfinding computation on 2D maps.
+Plus, <em>Jumper</em> offers a clean API which makes it very friendly and easy-to-use.<br></p>
+
+<p><strong>Jumper</strong> is written in pure <a href="http://lua.org">Lua</a>. Thus, it is not <strong>framework-related</strong> and can be used in <strong>any project</strong> embedding <a href="http://lua.org">Lua</a> code.</p>
+
+<h2>Files</h2>
+
+<ul>
+<li>
+<a href="https://github.com/Yonaba/Jumper/tree/master/Jumper">Jumper</a> contains the library itself.</li>
+<li>
+<a href="https://github.com/downloads/Yonaba/Jumper/Jumper_(Demo).love">Jumper_(Demo).love</a> | <a href="https://github.com/downloads/Yonaba/Jumper/Jumper_(Demo)_(Compiled%20For%20Windows).rar">Jumper_(Demo).rar</a> is a visual interactive demo.</li>
+<li>
+<a href="https://github.com/downloads/Yonaba/Jumper/Jumper_(Tests).love">Jumper_(Tests).love</a> | <a href="https://github.com/downloads/Yonaba/Jumper/Jumper_(Tests)_(Compiled%20For%20Windows).rar">Jumper_(Tests).rar</a> is another demo which performs a set of benchmark tests.</li>
+</ul><h2>Usage</h2>
+
+<p>Place the folder <a href="https://github.com/Yonaba/Jumper/tree/master/Jumper">Jumper</a> inside your projet. Use <em>require</em> to load it.</p>
+
+<pre><code>local Jumper = require('Jumper.init')
+</code></pre>
+
+<p><em>Note : If your LUA path includes search for "init.lua" on folder opening, as <a href="https://love2d.org">Löve</a> Framework do, you can simply use: require('Jumper')</em></p>
+
+<p>Now you must now setup a 2D matrix of <strong>integers</strong> or <strong>strings</strong> representing your world. Values stored in this matrix
+should represent whether or not a cell on the matrix is walkable or not. If you choose for instance
+<em>0</em> for walkable tiles, <strong>any other value</strong> will be considered as non walkable.</p>
+
+<pre><code>local map = {
+      {0,0,0},
+      {0,2,0},
+      {0,0,1},
+      }
+</code></pre>
+
+<p>To initialize the pathfinder, you will have to pass <strong>four values</strong>. </p>
+
+<pre><code>local walkable = 0
+local allowDiagonal = true
+local pather = Jumper(map,walkable,allowDiagonal,heuristic)
+</code></pre>
+
+<p>Only the first argument is <strong>required</strong>, the <strong>three others</strong> left are <strong>optional</strong>.</p>
+
+<ul>
+<li>
+<strong>map</strong> refers to the matrix representing the 2D world.</li>
+<li>
+<strong>walkable</strong> refers to the value representing walkable tiles. Will be considered as <em>0</em> if not given.</li>
+<li>
+<strong>allowDiagonal</strong> is a boolean saying whether or not diagonal moves are allowed. Will be considered as <strong>true</strong> if not given.</li>
+<li>
+<strong>heuristic</strong> is a predefined constant representing the heuristic function to be used for path computation.</li>
+</ul><h2>Distance heuristics</h2>
+
+<p><em>Jumper</em> features 4 types of distance heuristics.</p>
+
+<ul>
+<li>MANHATTAN Distance : <em>|dx| + |dy|</em>
+</li>
+<li>EUCLIDIAN Distance : <em>sqrt(dx*dx + dy*dy)</em>
+</li>
+<li>DIAGONAL Distance : <em>max(|dx|, |dy|)</em>
+</li>
+<li>CHEBYSHEV Distance : <em>DIAGONAL(dx,dy)</em>
+</li>
+</ul><p>Each of these distance heuristics are packed inside Jumper's core. By default, when initializing  <em>Jumper</em>, <strong>MANHATTAN</strong> Distance is used if 
+no heuristic was specified.<br>
+If you need to use <strong>another distance heuristic</strong>, you will need to <strong>require all distance heuristics</strong> first.
+All distance heuristics are defined inside <a href="https://github.com/Yonaba/Jumper/blob/master/Jumper/core/heuristics.lua">heuristics.lua</a>.</p>
+
+<pre><code>local walkable = 0
+local allowDiagonal = true
+local Heuristics. = require 'Jumper.core.heuristics'
+local Jumper = require('Jumper.init')
+local pather = Jumper(map,walkable,allowDiagonal,Heuristics.EUCLIDIAN)
+</code></pre>
+
+<p>You can <strong>alternatively</strong> use <em>setHeuristic(Name)</em>. This way, <strong>requiring distance heuristics is no more relevant</strong>.
+The <strong>heuristic name</strong> to be passed to <em>setHeuristic()</em> method must be one of these following, with quotes:</p>
+
+<ul>
+<li>
+<strong>"MANHATTAN"</strong> (referring to MANHATTAN Distance)</li>
+<li>
+<strong>"EUCLIDIAN"</strong> (referring to EUCLIDIAN Distance)</li>
+<li>
+<strong>"DIAGONAL"</strong> or <strong>"CHEBYSHEV"</strong> (referring to DIAGONAL Distance)</li>
+</ul><p>As an example :</p>
+
+<pre><code>local walkable = 0
+local allowDiagonal = true
+local Jumper = require('Jumper.init')
+local pather = Jumper(map,walkable,allowDiagonal)
+pather:setheuristic('EUCLIDIAN')
+</code></pre>
+
+<h2>API</h2>
+
+<h3>Main Pathfinder Class API</h3>
+
+<p>Once loaded and initialized properly, you can now used one of the following methods listed below.<br><strong>Assuming <em>pather</em> represents an instance of <em>Jumper</em> class.</strong></p>
+
+<h4>pather:setHeuristic(NAME)</h4>
+
+<p>Will change the heuristic to be used.<br><strong>NAME</strong> must be passed as a string.<br>
+Possible values are <strong>"MANHATTAN"</strong>,<strong>"EUCLIDIAN"</strong>,<strong>"DIAGONAL"</strong>,<strong>"CHEBYSHEV"</strong> (case-sensitive!).</p>
+
+<ul>
+<li>
+<strong>Argument NAME</strong>: a string</li>
+<li>
+<strong>Returns:</strong> Nothing</li>
+</ul><h4>pather:getHeuristic()</h4>
+
+<p>Will return a reference to the <strong>heuristic function</strong> internally used.<br></p>
+
+<ul>
+<li>
+<strong>Argument</strong>: Nothing</li>
+<li>
+<strong>Returns:</strong> a function</li>
+</ul><h4>pather:setDiagonalMoves(Bool)</h4>
+
+<p>Argument must be a boolean. <strong>true</strong> will authorize <strong>diagonal moves</strong>, <strong>false</strong> will allow <strong>only straight-moves</strong>.<br></p>
+
+<ul>
+<li>
+<strong>Argument Bool</strong>: a boolean</li>
+<li>
+<strong>Returns:</strong> Nothing</li>
+</ul><h4>pather:getDiagonalMoves()</h4>
+
+<p>Returns <strong>a boolean</strong> saying whether or not diagonal moves are allowed.</p>
+
+<ul>
+<li>
+<strong>Argument</strong>: Nothing</li>
+<li>
+<strong>Returns:</strong> a boolean</li>
+</ul><h4>pather:getGrid()</h4>
+
+<p>Returns a reference to the <strong>internal grid</strong> used by the pathfinder.
+This grid is <strong>not</strong> the map matrix given on initialization, but a <strong>virtual representation</strong> used internally.</p>
+
+<ul>
+<li>
+<strong>Argument</strong>: Nothing</li>
+<li>
+<strong>Returns:</strong> a grid (regular Lua table)</li>
+</ul><h4>pather:searchPath(startX,startY,endX,endY)</h4>
+
+<p>Main function, returns a path from [startX,startY] to [endX,endY] as an <strong>ordered array</strong> of locations ({x = ...,y = ...}).
+Otherwise returns <strong>nil</strong> if there is <strong>no valid path</strong>.
+Also returns a <strong>second value</strong> representing <strong>total cost of the move</strong> if a path was found.</p>
+
+<ul>
+<li>
+<strong>Argument startX</strong>: The X coordinate of the starting node (positive non zero integer)</li>
+<li>
+<strong>Argument startY</strong>: The Y coordinate of the starting node (positive non zero integer)</li>
+<li>
+<strong>Argument endX</strong>: The X coordinate of the goal node (positive non zero integer)</li>
+<li>
+<strong>Argument endY</strong>: The Y coordinate of the goal node (positive non zero integer)</li>
+<li>
+<strong>Returns:</strong> a path (regular Lua table) or nil</li>
+<li>
+<strong>Returns:</strong> the path cost (positive number) or nil</li>
+</ul><h4>pather:smooth(Path)</h4>
+
+<p>Polishes a path</p>
+
+<ul>
+<li>
+<strong>Argument Path</strong>: a path (regular Lua table)</li>
+<li>
+<strong>Returns:</strong> a path (regular Lua table)</li>
+</ul><h3>Grid Class API</h3>
+
+<p>Using <em>getGrid()</em> returns a reference to the internal grid used by the pathfinder.
+On this reference, you can use one of the following methods.<br><strong>Assuming <em>grid</em> holds the return value from <em>pather:getGrid()</em></strong></p>
+
+<h4>grid:getNodeAt(x,y)</h4>
+
+<p>Returns a reference to the node (X,Y) on the grid.</p>
+
+<ul>
+<li>
+<strong>Argument x</strong>: the X coordinate of the requested node (positive non zero integer)</li>
+<li>
+<strong>Argument y</strong>: the Y coordinate of the requested node (positive non zero integer)</li>
+<li>
+<strong>Returns:</strong> a node (regular Lua table)</li>
+</ul><h4>grid:isWalkableAt(x,y)</h4>
+
+<p>Returns a boolean saying whether or not the node (X,Y) <strong>exists on the grid and is walkable</strong>.</p>
+
+<ul>
+<li>
+<strong>Argument x</strong>: the X coordinate of the requested node (positive non zero integer)</li>
+<li>
+<strong>Argument y</strong>: the Y coordinate of the requested node (positive non zero integer)</li>
+<li>
+<strong>Returns:</strong> a boolean</li>
+</ul><h4>grid:setWalkableAt(x,y,boolean)</h4>
+
+<p>Sets the node (X,Y) <strong>walkable or not</strong> depending on the boolean given.
+<strong>true</strong> makes the node walkable, while <strong>false</strong> makes it unwalkable.</p>
+
+<ul>
+<li>
+<strong>Argument x</strong>: the X coordinate of the requested node (positive non zero integer)</li>
+<li>
+<strong>Argument y</strong>: the Y coordinate of the requested node (positive non zero integer)</li>
+<li>
+<strong>Argument boolean</strong>: a boolean</li>
+<li>
+<strong>Returns:</strong> Nothing</li>
+</ul><h4>grid:getNeighbours(node,allowDiagonal)</h4>
+
+<p>Returns an array list of nodes <strong>neighbouring location (X,Y)</strong>.
+The list will include or not adjacent nodes regards to the boolean <strong>allowDiagonal</strong>.</p>
+
+<ul>
+<li>
+<strong>Argument node</strong>: a node (regular Lua table)</li>
+<li>
+<strong>Argument allowDiagonal</strong>: a boolean</li>
+<li>
+<strong>Returns:</strong> list of neighbours (regular Lua table)</li>
+</ul><h4>grid:reset()</h4>
+
+<p>Resets the grid. Called internally before each path computation, should not be used explicitely.</p>
+
+<ul>
+<li>
+<strong>Argument</strong>: Nothing</li>
+<li>
+<strong>Returns:</strong> Nothing</li>
+</ul><h2>Handling paths</h2>
+
+<h3>Using native <em>searchPath()</em> method</h3>
+
+<p>Using <em>searchPath()</em> will return a table representing a path from one node to another.<br>
+The path is stored in a table using the form given below:</p>
+
+<pre><code>path = {
+          {x = 1,y = 1},
+          {x = 2,y = 2},
+          {x = 3,y = 3},
+          ...
+          {x = n,y = n},
+        }
+</code></pre>
+
+<p>You will have to make your own use of this to <strong>route your entities</strong> on the 2D map along this path.<br>
+Note that the path could contains some <em>holes</em> because of the algorithm used.<br>
+However, this should not cause a serious issue as the move from one step to another along the path is always straight.
+You can accomodate of this by yourself, or use the <strong>path smoother</strong>.</p>
+
+<h3>Using the path smoother</h3>
+
+<p><strong>Jumper</strong> provides a <strong>path smoother</strong> that can be used to polish a path early computed, filling the holes it may contain.
+As it directly alters the path given, both of these syntax works:</p>
+
+<pre><code>local walkable = 0
+local allowDiagonal = true
+local Jumper = require('Jumper.init')
+-- Assuming map is defined
+local pather = Jumper(map,walkable,allowDiagonal)
+local path, length = pather:searchPath(1,1,3,3)
+-- Capturing the returned value
+path = pather:smooth(path)
+
+
+local walkable = 0
+local allowDiagonal = true
+local Jumper = require('Jumper.init')
+-- Assuming map is defined
+local pather = Jumper(map,walkable,allowDiagonal)
+local path, length = pather:searchPath(1,1,3,3)
+-- Just passing the path to the smoother.
+pather:smooth(path)
+</code></pre>
+
+<h2>Known Issues</h2>
+
+<ul>
+<li>
+<strong>Straight moves</strong> : you may find paths with only straight moves allowed somewhat odd under some circumstances (too much zigzags). This is something I am aware of, and expecting to fix next.</li>
+</ul><h2>Participating Libraries</h2>
+
+<ul>
+<li><a href="http://yonaba.github.com/Lua-Class-System/">Lua Class System</a></li>
+<li><a href="http://yonaba.github.com/Binary-Heaps/">Binary heaps</a></li>
+</ul><h2>About Visual Demo</h2>
+
+<p><em>Jumper_(Demo)</em> is a visual demo of for the current library.<br>
+You can run it on <strong>Windows</strong>, <strong>MAC</strong> &amp; <strong>Linux</strong> to experience the full amazing capabilities of <strong>Jumper</strong>.<br></p>
+
+<ul>
+<li>
+<strong>Love version</strong>: <a href="https://github.com/downloads/Yonaba/Jumper/Jumper_(Demo).love">Jumper_(Demo).love</a> (Requires <a href="https://love2d.org">Löve 0.8.0 Framework</a> to run, <em>Compatible Windows, Mac OSX, Linux</em>)</li>
+<li>
+<strong>Compiled Version for Windows (Stand-alone)</strong>: <a href="https://github.com/downloads/Yonaba/Jumper/Jumper_(Demo)_(Compiled%20For%20Windows).rar">Jumper_(Demo).rar</a>
+</li>
+</ul><h2>About Benchmarking Tests</h2>
+
+<p><em>Jumper_(Tests)</em> is a demo featuring benchmarking tests using the current library.<br>
+You can run it on <strong>Windows</strong>, <strong>MAC</strong> &amp; <strong>Linux</strong>.<br>
+Maps included come from <a href="http://dragonage.bioware.com">Dragon Age : Origins</a> and were taken on <a href="http://movingai.com">Moving AI</a>.</p>
+
+<ul>
+<li>
+<strong>Love version</strong>: <a href="https://github.com/downloads/Yonaba/Jumper/Jumper_(Tests).love">Jumper_(Tests).love</a> (Requires <a href="https://love2d.org">Löve 0.8.0 Framework</a> to run, <em>Compatible Windows, Mac OSX, Linux</em>)</li>
+<li>
+<strong>Compiled Version for Windows (Stand-alone)</strong>: <a href="https://github.com/downloads/Yonaba/Jumper/Jumper_(Tests)_(Compiled%20For%20Windows).rar">Jumper_(Tests).rar</a>
+</li>
+</ul><p><strong>Note:</strong>While running Tests, you might be asked for outputting results.<br>
+You will find these outputs as <strong>log files</strong> (regular Text files) on <strong>different locations</strong> of your hard drive according to your <strong>operating system</strong> :</p>
+
+<ul>
+<li>
+<strong>Windows XP</strong> : <em>C:\Documents and Settings\Your_Username\Application Data\Love\Jumper\</em> or <em>%appdata%\Love\Jumper\</em>
+</li>
+<li>
+<strong>Windows Vista</strong> and <strong>Win7</strong> : <em>C:\Users\Your_Username\AppData\Roaming\LOVE\Jumper\</em> or <em>%appdata%\Love\Jumper\</em>
+</li>
+<li>
+<strong>Linux</strong> : <em>$XDG_DATA_HOME/love/Jumper/</em> or ~/.local/share/love/Jumper/*</li>
+<li>
+<strong>Mac</strong> : <em>/Users/Your_Username/Library/Application Support/LOVE/Jumper/</em>
+</li>
+</ul><h2>Credits and Thanks</h2>
+
+<ul>
+<li>
+<a href="http://users.cecs.anu.edu.au/%7Edharabor/home.html">Daniel Harabor</a>, <a href="http://www.grastien.net/ban/">Alban Grastien</a> : for <a href="http://users.cecs.anu.edu.au/%7Edharabor/data/papers/harabor-grastien-aaai11.pdf">technical papers</a>.<br>
+</li>
+<li>
+<a href="https://github.com/qiao">XueXiao Xu</a>, <a href="https://github.com/aniero">Nathan Witmer</a>: for their amazing <a href="https://github.com/qiao/PathFinding.js">port</a> in Javascript<br>
+</li>
+<li>
+<a href="https://love2d.org">Löve</a> Development Team, for <a href="https://love2d.org">Löve</a> Framework.</li>
+</ul><h2>License</h2>
+
+<p>This work is under <a href="http://www.opensource.org/licenses/mit-license.php">MIT-LICENSE</a><br>
+Copyright (c) 2012 Roland Yonaba</p>
+
+<pre><code>Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</code></pre>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/Yonaba">Yonaba</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
