@@ -1,5 +1,8 @@
 #Version history#
 
+##1.1 (08/01/12)
+* Updated with third-party (with Binary_Heaps ported to 1.4)
+
 ##1.0 (06/14/12)
 * Added Path smoother
 * Better handling of straight moves
